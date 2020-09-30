@@ -1,8 +1,18 @@
 console.log('App.js is running');
 
+// Conditional Rendering
+// if statements (using functions)
+// ternary operator
+// logical operator
+
+// Challenge 3
+// only render subtitle if it exists - logical operator
+// if options.length > 0 "Here are your options" else "No Options"
+
 var app = {
     title: 'Indecision App',
-    subtitle: 'Put your life in the hands of a computer!'
+    subtitle: 'Put your life in the hands of a computer!',
+    options: ['One', 'Two']
 };
 
 var template = (
@@ -16,10 +26,7 @@ var template = (
     </div>
 );
 
-// Conditional Rendering
-// if statements (using functions)
-// ternary operator
-// logical operator
+
 
 var user = {
     name: 'Manpreet',
