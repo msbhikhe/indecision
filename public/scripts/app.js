@@ -25,10 +25,15 @@ var template = React.createElement(
         null,
         app.title
     ),
-    React.createElement(
+    app.subtitle && React.createElement(
         'p',
         null,
         app.subtitle
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options.length > 0 ? "Here are your options" : "No options"
     ),
     React.createElement(
         'ol',
@@ -86,4 +91,4 @@ var templateTwo = React.createElement(
         'This is also possible'
     )
 );
-ReactDOM.render(templateTwo, document.getElementById('app'));
+ReactDOM.render(template, document.getElementById('app'));
