@@ -2,9 +2,6 @@
 
 console.log('App.js is running');
 
-//Create app object title/subtitle
-//user title/subtitle in template
-
 var app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer!'
@@ -39,10 +36,28 @@ var template = React.createElement(
     )
 );
 
+// Conditional Rendering
+// if statements (using functions)
+// ternary operator
+// logical operator
+
 var user = {
     name: 'Manpreet',
     age: 27,
     location: 'India'
+};
+
+function getLocation(user) {
+    if (user.location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            user.location
+        );
+    } else {
+        return 'Unknown';
+    }
 };
 
 var templateTwo = React.createElement(
@@ -51,19 +66,19 @@ var templateTwo = React.createElement(
     React.createElement(
         'h1',
         null,
-        user.name
+        user.name ? user.name : 'Anonymous'
     ),
-    React.createElement(
+    user.age >= 18 && React.createElement(
         'p',
         null,
         'Age: ',
         user.age
     ),
+    getLocation(user),
     React.createElement(
         'p',
         null,
-        'Location: ',
-        user.location
+        'This is also possible'
     )
 );
-ReactDOM.render(template, document.getElementById('app'));
+ReactDOM.render(templateTwo, document.getElementById('app'));
