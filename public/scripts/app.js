@@ -2,6 +2,9 @@
 
 console.log('App.js is running');
 
+//Create app object title/subtitle
+//user title/subtitle in template
+
 var template = React.createElement(
     'div',
     null,
@@ -13,7 +16,21 @@ var template = React.createElement(
     React.createElement(
         'p',
         null,
-        'This is paragraph'
+        'This is some info'
+    ),
+    React.createElement(
+        'ol',
+        null,
+        React.createElement(
+            'li',
+            null,
+            'Item one'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item two'
+        )
     )
 );
 
@@ -21,11 +38,9 @@ var user = {
     name: 'Manpreet',
     age: 27,
     location: 'India'
+};
 
-    // JSX can render expressions only 
-    // Eg:     <h1>{user}</h1> is invalid 
-
-};var templateTwo = React.createElement(
+var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(

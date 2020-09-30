@@ -1,9 +1,16 @@
 console.log('App.js is running');
 
+//Create app object title/subtitle
+//user title/subtitle in template
+
 var template = (
     <div>
         <h1>Indecision App</h1>
-        <p>This is paragraph</p>
+        <p>This is some info</p>
+        <ol>
+            <li>Item one</li>
+            <li>Item two</li>
+        </ol>
     </div>
 );
 
@@ -12,9 +19,6 @@ var user = {
     age: 27,
     location: 'India'
 }
-
-// JSX can render expressions only 
-// Eg:     <h1>{user}</h1> is invalid 
 
 var templateTwo = (
     <div>
