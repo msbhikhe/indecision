@@ -7,11 +7,20 @@ var template = (
     </div>
 );
 
+var user = {
+    name: 'Manpreet',
+    age: 27,
+    location: 'India'
+}
+
+// JSX can render expressions only 
+// Eg:     <h1>{user}</h1> is invalid 
+
 var templateTwo = (
     <div>
-        <h1>Manpreet</h1>
-        <p>Age: 27</p>
-        <p>Location: India</p>
+        <h1>{user.name}</h1>
+        <p>Age: {user.age}</p>
+        <p>Location: {user.location}</p>
     </div>
 );
 ReactDOM.render(templateTwo, document.getElementById('app'));

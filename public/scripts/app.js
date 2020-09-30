@@ -17,23 +17,33 @@ var template = React.createElement(
     )
 );
 
-var templateTwo = React.createElement(
+var user = {
+    name: 'Manpreet',
+    age: 27,
+    location: 'India'
+
+    // JSX can render expressions only 
+    // Eg:     <h1>{user}</h1> is invalid 
+
+};var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Manpreet'
+        user.name
     ),
     React.createElement(
         'p',
         null,
-        'Age: 27'
+        'Age: ',
+        user.age
     ),
     React.createElement(
         'p',
         null,
-        'Location: India'
+        'Location: ',
+        user.location
     )
 );
 ReactDOM.render(templateTwo, document.getElementById('app'));
