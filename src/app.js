@@ -1,14 +1,5 @@
 console.log('App.js is running');
 
-// Conditional Rendering
-// if statements (using functions)
-// ternary operator
-// logical operator
-
-// Challenge 3
-// only render subtitle if it exists - logical operator
-// if options.length > 0 "Here are your options" else "No Options"
-
 const app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer!',
@@ -28,28 +19,39 @@ const template = (
     </div>
 );
 
+// ------------------------------------------------------------------------------
+// JSX doesn't have in-built data-binding
+// Code to showcase manual data-binding & re-rendering
 
+let count = 0;
 
-const user = {
-    name: 'Manpreet',
-    age: 27,
-    location: 'India'
+const addOne = () => {
+    count++;
+    renderCounterApp();
+};
+const minusOne = () => {
+    count--;
+    renderCounterApp();
+};
+const reset = () => {
+    count = 0;
+    renderCounterApp();
 };
 
-function getLocation(user) {
-    if(user.location){
-    return <p>Location: {user.location}</p>;
-    } else {
-        return 'Unknown';
-    }
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>Reset</button>
+        </div>
+    );
+
+    ReactDOM.render(templateTwo, document.getElementById('app'));
 };
 
-const templateTwo = (
-    <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1>
-        {user.age >= 18 && <p>Age: {user.age}</p>}
-        {getLocation(user)}
-        {<p>This is also possible</p>}
-    </div>
-);
-ReactDOM.render(template, document.getElementById('app'));
+renderCounterApp();
+// ------------------------------------------------------------------------------
+
+// ReactDOM.render(template, document.getElementById('app'));

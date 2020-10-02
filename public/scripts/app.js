@@ -2,15 +2,6 @@
 
 console.log('App.js is running');
 
-// Conditional Rendering
-// if statements (using functions)
-// ternary operator
-// logical operator
-
-// Challenge 3
-// only render subtitle if it exists - logical operator
-// if options.length > 0 "Here are your options" else "No Options"
-
 var app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer!',
@@ -56,44 +47,56 @@ var template = React.createElement(
     )
 );
 
-var user = {
-    name: 'Manpreet',
-    age: 27,
-    location: 'India'
+// ------------------------------------------------------------------------------
+// JSX doesn't have in-built data-binding
+// Code to showcase manual data-binding & re-rendering
+
+var count = 0;
+
+var addOne = function addOne() {
+    count++;
+    renderCounterApp();
+};
+var minusOne = function minusOne() {
+    count--;
+    renderCounterApp();
+};
+var reset = function reset() {
+    count = 0;
+    renderCounterApp();
 };
 
-function getLocation(user) {
-    if (user.location) {
-        return React.createElement(
-            'p',
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
             null,
-            'Location: ',
-            user.location
-        );
-    } else {
-        return 'Unknown';
-    }
+            'Count: ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: addOne },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: minusOne },
+            '-1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'Reset'
+        )
+    );
+
+    ReactDOM.render(templateTwo, document.getElementById('app'));
 };
 
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.name ? user.name : 'Anonymous'
-    ),
-    user.age >= 18 && React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.age
-    ),
-    getLocation(user),
-    React.createElement(
-        'p',
-        null,
-        'This is also possible'
-    )
-);
-ReactDOM.render(template, document.getElementById('app'));
+renderCounterApp();
+// ------------------------------------------------------------------------------
+
+// ReactDOM.render(template, document.getElementById('app'));
