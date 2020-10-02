@@ -1,38 +1,12 @@
 'use strict';
 
-console.log('App.js is running');
+var visibility = false;
 
-var app = {
-    title: 'Indecision App',
-    subtitle: 'Put your life in the hands of a computer!',
-    options: []
-};
-
-var onFormSubmit = function onFormSubmit(e) {
-    e.preventDefault();
-
-    var option = e.target.elements.option.value;
-
-    if (option) {
-        app.options.push(option);
-    }
-
-    e.target.elements.option.value = '';
-
+var toggleVisibility = function toggleVisibility() {
+    visibility = !visibility;
     renderApp();
 };
 
-var removeAll = function removeAll() {
-    app.options = [];
-    renderApp();
-};
-
-var pickOption = function pickOption() {
-    var index = Math.floor(Math.random() * app.options.length);
-    alert(app.options[index]);
-};
-
-// JSX arrays require a key attribute so that react can diff and manage parts for re-rendering
 var renderApp = function renderApp() {
     var template = React.createElement(
         'div',
@@ -40,48 +14,17 @@ var renderApp = function renderApp() {
         React.createElement(
             'h1',
             null,
-            app.title
-        ),
-        app.subtitle && React.createElement(
-            'p',
-            null,
-            app.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            app.options.length > 0 ? "Here are your options" : "No options"
+            'Visibility Toggle'
         ),
         React.createElement(
             'button',
-            { disabled: app.options.length === 0, onClick: pickOption },
-            'What should i do ?'
+            { onClick: toggleVisibility },
+            visibility ? 'Hide details' : 'Show details'
         ),
-        React.createElement(
-            'button',
-            { onClick: removeAll },
-            'Remove All'
-        ),
-        React.createElement(
-            'ol',
+        visibility && React.createElement(
+            'p',
             null,
-            app.options.map(function (option, index) {
-                return React.createElement(
-                    'li',
-                    { key: index },
-                    option
-                );
-            })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit },
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                'Add option'
-            )
+            'Hey. These are some details you can now see !'
         )
     );
 
