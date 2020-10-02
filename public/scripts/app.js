@@ -27,6 +27,11 @@ var removeAll = function removeAll() {
     renderApp();
 };
 
+var pickOption = function pickOption() {
+    var index = Math.floor(Math.random() * app.options.length);
+    alert(app.options[index]);
+};
+
 // JSX arrays require a key attribute so that react can diff and manage parts for re-rendering
 var renderApp = function renderApp() {
     var template = React.createElement(
@@ -48,9 +53,9 @@ var renderApp = function renderApp() {
             app.options.length > 0 ? "Here are your options" : "No options"
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length
+            'button',
+            { disabled: app.options.length === 0, onClick: pickOption },
+            'What should i do ?'
         ),
         React.createElement(
             'button',
