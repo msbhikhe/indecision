@@ -14,7 +14,7 @@ console.log('App.js is running');
 var app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer!',
-    options: ['One', 'Two']
+    options: ['One', 'Two', 'Three']
 };
 
 var template = React.createElement(
@@ -47,6 +47,11 @@ var template = React.createElement(
             'li',
             null,
             'Item two'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item three'
         )
     )
 );
