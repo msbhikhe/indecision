@@ -15,8 +15,6 @@ const onFormSubmit = (e) => {
         app.options.push(option);
     }
     
-    // required because reactDom only renders parts that have been modified.
-    // try commenting below line and see difference for yourself
     e.target.elements.option.value = '';
     
     renderApp();
@@ -28,6 +26,7 @@ const removeAll = () => {
     renderApp();
 };
 
+// JSX arrays require a key attribute so that react can diff and manage parts for re-rendering
 const renderApp = () => {
     const template = (
         <div>
@@ -37,9 +36,9 @@ const renderApp = () => {
             <p>{app.options.length}</p>
             <button onClick={removeAll}>Remove All</button>
             <ol>
-                <li>Item one</li>
-                <li>Item two</li>
-                <li>Item three</li>
+                {
+                    app.options.map((option, index) => <li key={index}>{option}</li>)
+                }
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option"/>

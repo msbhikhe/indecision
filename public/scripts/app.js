@@ -17,8 +17,6 @@ var onFormSubmit = function onFormSubmit(e) {
         app.options.push(option);
     }
 
-    // required because reactDom only renders parts that have been modified.
-    // try commenting below line and see difference for yourself
     e.target.elements.option.value = '';
 
     renderApp();
@@ -29,6 +27,7 @@ var removeAll = function removeAll() {
     renderApp();
 };
 
+// JSX arrays require a key attribute so that react can diff and manage parts for re-rendering
 var renderApp = function renderApp() {
     var template = React.createElement(
         'div',
@@ -61,21 +60,13 @@ var renderApp = function renderApp() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'Item one'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item two'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item three'
-            )
+            app.options.map(function (option, index) {
+                return React.createElement(
+                    'li',
+                    { key: index },
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',
