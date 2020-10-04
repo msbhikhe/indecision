@@ -5,7 +5,7 @@ class Person{
     }
 
     getGreeting() {
-        return `Hi ! ${this.name}`;
+        return `Hi! I am ${this.name}.`;
     }
 
     getDescription() {
@@ -27,15 +27,38 @@ class Student extends Person {
         let description = super.getDescription();
 
         if(this.hasMajor()) {
-            description += ` Their major is ${this.major}.`
+            description += ` Their major is ${this.major}.`;
         }
 
         return description;
     }
 }
 
-const me = new Student();
-console.log(me.getDescription());
+// Traveller -> Person
+// Add support for homeLocation
+// 1. Hi! I am Andrew Mead. I'm visiting from Philadelphia.
+// 2. Hi! I am Andrew Mead.
 
-const other = new Student('Robin', 27, 'CS');
-console.log(other.getDescription());
+class Traveller extends Person {
+    constructor(name, age, homeLocation) {
+        super(name, age);
+        this.homeLocation = homeLocation;
+    }
+
+    getGreeting() {
+        let greeting = super.getGreeting();
+
+        if(this.homeLocation) {
+            greeting += ` I'm visiting from ${this.homeLocation}.`;
+        }
+
+        return greeting;
+    }
+}
+
+
+const me = new Traveller();
+console.log(me.getGreeting());
+
+const other = new Traveller('Robin', 27, 'London');
+console.log(other.getGreeting());

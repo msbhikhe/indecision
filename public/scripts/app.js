@@ -24,7 +24,7 @@ var Person = function () {
     _createClass(Person, [{
         key: 'getGreeting',
         value: function getGreeting() {
-            return 'Hi ! ' + this.name;
+            return 'Hi! I am ' + this.name + '.';
         }
     }, {
         key: 'getDescription',
@@ -71,8 +71,41 @@ var Student = function (_Person) {
     return Student;
 }(Person);
 
-var me = new Student();
-console.log(me.getDescription());
+// Traveller -> Person
+// Add support for homeLocation
+// 1. Hi! I am Andrew Mead. I'm visiting from Philadelphia.
+// 2. Hi! I am Andrew Mead.
 
-var other = new Student('Robin', 27, 'CS');
-console.log(other.getDescription());
+var Traveller = function (_Person2) {
+    _inherits(Traveller, _Person2);
+
+    function Traveller(name, age, homeLocation) {
+        _classCallCheck(this, Traveller);
+
+        var _this2 = _possibleConstructorReturn(this, (Traveller.__proto__ || Object.getPrototypeOf(Traveller)).call(this, name, age));
+
+        _this2.homeLocation = homeLocation;
+        return _this2;
+    }
+
+    _createClass(Traveller, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            var greeting = _get(Traveller.prototype.__proto__ || Object.getPrototypeOf(Traveller.prototype), 'getGreeting', this).call(this);
+
+            if (this.homeLocation) {
+                greeting += ' I\'m visiting from ' + this.homeLocation + '.';
+            }
+
+            return greeting;
+        }
+    }]);
+
+    return Traveller;
+}(Person);
+
+var me = new Traveller();
+console.log(me.getGreeting());
+
+var other = new Traveller('Robin', 27, 'London');
+console.log(other.getGreeting());
