@@ -9,12 +9,33 @@ class Person{
     }
 
     getDescription() {
-        return `${this.name} is ${this.age} years old.`;
+        return `${this.name} is ${this.age} year(s) old.`;
     }
 };
 
-const me = new Person();
+class Student extends Person {
+    constructor(name, age, major) {
+        super(name, age);
+        this.major = major;
+    }
+
+    hasMajor() {
+        return !!this.major;
+    }
+
+    getDescription() {
+        let description = super.getDescription();
+
+        if(this.hasMajor()) {
+            description += ` Their major is ${this.major}.`
+        }
+
+        return description;
+    }
+}
+
+const me = new Student();
 console.log(me.getDescription());
 
-const other = new Person('Robin', 27);
+const other = new Student('Robin', 27, 'CS');
 console.log(other.getDescription());
