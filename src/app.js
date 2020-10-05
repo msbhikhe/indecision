@@ -23,11 +23,21 @@ class Action extends React.Component {
 // Options -> Options component here
 // Add Option -> Add option component here
 
+class Option extends React.Component {
+    render() {
+        return (
+          <div>
+            <p>This is option component</p>
+          </div>
+        );
+      }
+}
 class Options extends React.Component {
   render() {
     return (
       <div>
         <p>This is options component</p>
+        <Option/>
       </div>
     );
   }
@@ -46,13 +56,16 @@ class AddOption extends React.Component {
   }
 }
 
-const jsx = (
-    <div>
-        <Header/>
-        <Action/>
-        <Options/>
-        <AddOption/>
-    </div>
-);
+class IndecisionApp extends React.Component {
+    render() {
+        return (
+        <div>
+            <Header/>
+            <Action/>
+            <Options/>
+            <AddOption/>
+        </div>);
+    }
+}
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp/>, document.getElementById('app'));
