@@ -36,13 +36,14 @@ class Action extends React.Component {
   }
 }
 
-// Render p tag for each option
+// Key is a reserved keyword for JSX arrays. SO it is not available in props
+// Props is one way communication (downwards)
 class Options extends React.Component {
   render() {
     return (
       <div>
         {
-          this.props.options.map((option, index) => <p key={index}>{option}</p>)
+          this.props.options.map((option, index) => <Option key={index} optionText={option}/>)
         }
       </div>
     );
@@ -53,7 +54,7 @@ class Option extends React.Component {
     render() {
         return (
           <div>
-            <p>This is option component</p>
+            <p>{this.props.optionText}</p>
           </div>
         );
       }

@@ -98,7 +98,8 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-// Render p tag for each option
+// Key is a reserved keyword for JSX arrays. SO it is not available in props
+// Props is one way communication (downwards)
 
 
 var Options = function (_React$Component4) {
@@ -117,11 +118,7 @@ var Options = function (_React$Component4) {
         'div',
         null,
         this.props.options.map(function (option, index) {
-          return React.createElement(
-            'p',
-            { key: index },
-            option
-          );
+          return React.createElement(Option, { key: index, optionText: option });
         })
       );
     }
@@ -148,7 +145,7 @@ var Option = function (_React$Component5) {
         React.createElement(
           'p',
           null,
-          'This is option component'
+          this.props.optionText
         )
       );
     }
