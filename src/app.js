@@ -40,8 +40,13 @@ class Action extends React.Component {
   }
 }
 
-// Works, but this way is inefficient as bind is called everytime render is executed
+// Following is efficient way. Bind is only run once
+// React component constructor receives props object
 class Options extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
   handleRemoveAll() {
     console.log(this.props.options);
   }
