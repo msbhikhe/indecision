@@ -40,12 +40,11 @@ class Action extends React.Component {
   }
 }
 
-// Add remove all button
-// Setup handleRemoveAll -> alert some message
-// setup onclick to fire the method
+// On Sending a function as reference, the function loses binding to 'this'
+// Throws error -> Uncaught TypeError: Cannot read property 'props' of undefined
 class Options extends React.Component {
   handleRemoveAll() {
-    alert("All options removed");
+    console.log(this.props.options);
   }
 
   render() {
@@ -70,9 +69,6 @@ class Option extends React.Component {
   }
 }
 
-// Setup the form with text input and submit button
-// Wire up onSubmit
-// handleAddOption -> fetch the value typed -> if value then alert
 class AddOption extends React.Component {
   handleAddOption(e) {
     e.preventDefault();

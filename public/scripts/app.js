@@ -102,9 +102,8 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-// Add remove all button
-// Setup handleRemoveAll -> alert some message
-// setup onclick to fire the method
+// On Sending a function as reference, the function loses binding to 'this'
+// Throws error -> Uncaught TypeError: Cannot read property 'props' of undefined
 
 
 var Options = function (_React$Component4) {
@@ -119,7 +118,7 @@ var Options = function (_React$Component4) {
   _createClass(Options, [{
     key: "handleRemoveAll",
     value: function handleRemoveAll() {
-      alert("All options removed");
+      console.log(this.props.options);
     }
   }, {
     key: "render",
@@ -168,11 +167,6 @@ var Option = function (_React$Component5) {
 
   return Option;
 }(React.Component);
-
-// Setup the form with text input and submit button
-// Wire up onSubmit
-// handleAddOption -> fetch the value typed -> if value then alert
-
 
 var AddOption = function (_React$Component6) {
   _inherits(AddOption, _React$Component6);
