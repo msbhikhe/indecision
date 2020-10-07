@@ -40,8 +40,7 @@ class Action extends React.Component {
   }
 }
 
-// On Sending a function as reference, the function loses binding to 'this'
-// Throws error -> Uncaught TypeError: Cannot read property 'props' of undefined
+// Works, but this way is inefficient as bind is called everytime render is executed
 class Options extends React.Component {
   handleRemoveAll() {
     console.log(this.props.options);
@@ -50,7 +49,7 @@ class Options extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleRemoveAll}>Remove All</button>
+        <button onClick={this.handleRemoveAll.bind(this)}>Remove All</button>
         {this.props.options.map((option, index) => (
           <Option key={index} optionText={option} />
         ))}

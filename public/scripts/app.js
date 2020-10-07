@@ -102,8 +102,7 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-// On Sending a function as reference, the function loses binding to 'this'
-// Throws error -> Uncaught TypeError: Cannot read property 'props' of undefined
+// Works, but this way is inefficient as bind is called everytime render is executed
 
 
 var Options = function (_React$Component4) {
@@ -128,7 +127,7 @@ var Options = function (_React$Component4) {
         null,
         React.createElement(
           "button",
-          { onClick: this.handleRemoveAll },
+          { onClick: this.handleRemoveAll.bind(this) },
           "Remove All"
         ),
         this.props.options.map(function (option, index) {
