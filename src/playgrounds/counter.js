@@ -4,10 +4,16 @@ class Counter extends React.Component {
         this.addOne = this.addOne.bind(this);
         this.minusOne = this.minusOne.bind(this);
         this.reset = this.reset.bind(this);
-        this.state = {count: 1};
+        this.state = {
+            count: 1
+        };
     }
     addOne() {
-        
+        // Manually changing state doesn't rerender the component
+        this.state.count += 1;
+        console.log(this.state.count);
+        // this won't work either
+        this.render();
     }
 
     minusOne() {
