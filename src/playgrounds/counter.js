@@ -5,23 +5,32 @@ class Counter extends React.Component {
         this.minusOne = this.minusOne.bind(this);
         this.reset = this.reset.bind(this);
         this.state = {
-            count: 1
+            count: 0
         };
     }
     addOne() {
-        // Manually changing state doesn't rerender the component
-        this.state.count += 1;
-        console.log(this.state.count);
-        // this won't work either
-        this.render();
+        this.setState( prevState => {
+            // in set state method we return object with only those properties that we wish to modify
+            return {
+                count: prevState.count + 1
+            };
+        });
     }
 
     minusOne() {
-
+        this.setState( prevState => {
+            return {
+                count: prevState.count - 1
+            };
+        });
     }
 
     reset() {
-
+        this.setState( prevState => {
+            return {
+                count: 0
+            };
+        });
     }
     render() {
         return (

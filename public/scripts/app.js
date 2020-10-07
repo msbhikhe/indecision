@@ -20,7 +20,7 @@ var Counter = function (_React$Component) {
         _this.minusOne = _this.minusOne.bind(_this);
         _this.reset = _this.reset.bind(_this);
         _this.state = {
-            count: 1
+            count: 0
         };
         return _this;
     }
@@ -28,18 +28,31 @@ var Counter = function (_React$Component) {
     _createClass(Counter, [{
         key: "addOne",
         value: function addOne() {
-            // Manually changing state doesn't rerender the component
-            this.state.count += 1;
-            console.log(this.state.count);
-            // this won't work either
-            this.render();
+            this.setState(function (prevState) {
+                // in set state method we return object with only those properties that we wish to modify
+                return {
+                    count: prevState.count + 1
+                };
+            });
         }
     }, {
         key: "minusOne",
-        value: function minusOne() {}
+        value: function minusOne() {
+            this.setState(function (prevState) {
+                return {
+                    count: prevState.count - 1
+                };
+            });
+        }
     }, {
         key: "reset",
-        value: function reset() {}
+        value: function reset() {
+            this.setState(function (prevState) {
+                return {
+                    count: 0
+                };
+            });
+        }
     }, {
         key: "render",
         value: function render() {
