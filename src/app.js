@@ -1,15 +1,64 @@
 class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.pickOption = this.pickOption.bind(this);
+    this.removeAllOptions = this.removeAllOptions.bind(this);
+    this.addOption = this.addOption.bind(this);
+    this.state = {
+      options: [],
+    };
+  }
+
+  pickOption() {
+    const index = Math.floor(Math.random() * this.state.options.length);
+    alert(this.state.options[index]);
+  }
+
+  removeAllOptions() {
+    this.setState(() => {
+      return {
+        options: [],
+      };
+    });
+  }
+
+  addOption(option) {
+    this.setState((prevState) => {
+      // Never manipulate prevState
+      // prevState.options.push(option);
+      // return {
+      //   options: prevState.options
+      // };
+
+      // Not the cleanest way
+      // let options = prevState.options;
+      // options.push(option);
+      // return {
+      //   options: options,
+      // };
+
+      return {
+        options: prevState.options.concat(option)
+      };
+    });
+  }
+
   render() {
     const title = "Indecision App";
     const subtitle = "Put your life in the hands of a computer!";
-    let options = ["One", "Two", "Three"];
 
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Action />
-        <Options options={options} />
-        <AddOption />
+        <Action
+          hasOptions={this.state.options.length > 0}
+          pickOption={this.pickOption}
+        />
+        <Options
+          options={this.state.options}
+          removeAllOptions={this.removeAllOptions}
+        />
+        <AddOption addOption={this.addOption} />
       </div>
     );
   }
@@ -27,34 +76,25 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-  handlePick() {
-    alert("Pick option");
-  }
-
   render() {
     return (
       <div>
-        <button onClick={this.handlePick}>What should I do?</button>
+        <button
+          disabled={!this.props.hasOptions}
+          onClick={this.props.pickOption}
+        >
+          What should I do?
+        </button>
       </div>
     );
   }
 }
 
-// Following is efficient way. Bind is only run once
-// React component constructor receives props object
 class Options extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleRemoveAll = this.handleRemoveAll.bind(this);
-  }
-  handleRemoveAll() {
-    console.log(this.props.options);
-  }
-
   render() {
     return (
       <div>
-        <button onClick={this.handleRemoveAll.bind(this)}>Remove All</button>
+        <button onClick={this.props.removeAllOptions}>Remove All</button>
         {this.props.options.map((option, index) => (
           <Option key={index} optionText={option} />
         ))}
@@ -74,13 +114,19 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
-  handleAddOption(e) {
+  constructor(props) {
+    super(props);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  // Handling the form is responsibility of this component not it's parent
+  handleFormSubmit(e) {
     e.preventDefault();
 
-    const option = e.target.elements.option.value;
+    const option = e.target.elements.option.value.trim();
 
     if (option) {
-     alert(option);
+      this.props.addOption(option);
     }
 
     e.target.elements.option.value = "";
@@ -89,7 +135,7 @@ class AddOption extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleAddOption}>
+        <form onSubmit={this.handleFormSubmit}>
           <input type="text" name="option" />
           <button>Add option</button>
         </form>
