@@ -27,21 +27,31 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+  handlePick() {
+    alert('Pick option');
+  }
+
   render() {
     return (
       <div>
-        <button>What should I do?</button>
+        <button onClick={this.handlePick}>What should I do?</button>
       </div>
     );
   }
 }
 
-// Key is a reserved keyword for JSX arrays. SO it is not available in props
-// Props is one way communication (downwards)
+// Add remove all button
+// Setup handleRemoveAll -> alert some message
+// setup onclick to fire the method
 class Options extends React.Component {
+  handleRemoveAll() {
+    alert('All options removed');
+  }
+
   render() {
     return (
       <div>
+        <button onClick={this.handleRemoveAll}>Remove All</button>
         {
           this.props.options.map((option, index) => <Option key={index} optionText={option}/>)
         }

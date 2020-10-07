@@ -81,6 +81,11 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
+    key: 'handlePick',
+    value: function handlePick() {
+      alert('Pick option');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -88,7 +93,7 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           'button',
-          null,
+          { onClick: this.handlePick },
           'What should I do?'
         )
       );
@@ -98,8 +103,9 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
-// Key is a reserved keyword for JSX arrays. SO it is not available in props
-// Props is one way communication (downwards)
+// Add remove all button
+// Setup handleRemoveAll -> alert some message
+// setup onclick to fire the method
 
 
 var Options = function (_React$Component4) {
@@ -112,11 +118,21 @@ var Options = function (_React$Component4) {
   }
 
   _createClass(Options, [{
+    key: 'handleRemoveAll',
+    value: function handleRemoveAll() {
+      alert('All options removed');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
+        React.createElement(
+          'button',
+          { onClick: this.handleRemoveAll },
+          'Remove All'
+        ),
         this.props.options.map(function (option, index) {
           return React.createElement(Option, { key: index, optionText: option });
         })
