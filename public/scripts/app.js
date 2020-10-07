@@ -98,6 +98,9 @@ var Action = function (_React$Component3) {
   return Action;
 }(React.Component);
 
+// Render p tag for each option
+
+
 var Options = function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
@@ -113,13 +116,13 @@ var Options = function (_React$Component4) {
       return React.createElement(
         'div',
         null,
-        React.createElement(
-          'p',
-          null,
-          'Length of options: ',
-          this.props.options.length
-        ),
-        React.createElement(Option, null)
+        this.props.options.map(function (option, index) {
+          return React.createElement(
+            'p',
+            { key: index },
+            option
+          );
+        })
       );
     }
   }]);

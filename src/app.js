@@ -36,12 +36,14 @@ class Action extends React.Component {
   }
 }
 
+// Render p tag for each option
 class Options extends React.Component {
   render() {
     return (
       <div>
-        <p>Length of options: {this.props.options.length}</p>
-        <Option/>
+        {
+          this.props.options.map((option, index) => <p key={index}>{option}</p>)
+        }
       </div>
     );
   }
