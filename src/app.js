@@ -1,9 +1,26 @@
+class IndecisionApp extends React.Component {
+  render() {
+
+  const title = 'Indecision App';
+  const subtitle = 'Put your life in the hands of a computer!';
+  let options = ['One', 'Two', 'Three'];
+
+  return (
+      <div>
+          <Header title={title} subtitle={subtitle}/>
+          <Action/>
+          <Options options={options}/>
+          <AddOption/>
+      </div>);
+  }
+}
+
 class Header extends React.Component {
   render() {
     return (
       <div>
-        <h1>Indecision App</h1>
-        <h2>Put your life in the hands of a computer!</h2>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
       </div>
     );
   }
@@ -19,9 +36,16 @@ class Action extends React.Component {
   }
 }
 
-// React component challenge 1
-// Options -> Options component here
-// Add Option -> Add option component here
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Length of options: {this.props.options.length}</p>
+        <Option/>
+      </div>
+    );
+  }
+}
 
 class Option extends React.Component {
     render() {
@@ -31,16 +55,6 @@ class Option extends React.Component {
           </div>
         );
       }
-}
-class Options extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>This is options component</p>
-        <Option/>
-      </div>
-    );
-  }
 }
 
 class AddOption extends React.Component {
@@ -54,18 +68,6 @@ class AddOption extends React.Component {
       </div>
     );
   }
-}
-
-class IndecisionApp extends React.Component {
-    render() {
-        return (
-        <div>
-            <Header/>
-            <Action/>
-            <Options/>
-            <AddOption/>
-        </div>);
-    }
 }
 
 ReactDOM.render(<IndecisionApp/>, document.getElementById('app'));
