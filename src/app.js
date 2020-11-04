@@ -3,6 +3,7 @@ class IndecisionApp extends React.Component {
     super(props);
     this.pickOption = this.pickOption.bind(this);
     this.removeAllOptions = this.removeAllOptions.bind(this);
+    this.removeOption = this.removeOption.bind(this);
     this.addOption = this.addOption.bind(this);
     this.state = {
       options: props.options,
@@ -16,6 +17,12 @@ class IndecisionApp extends React.Component {
 
   removeAllOptions() {
     this.setState(() => ({options: []}));
+  }
+
+  removeOption(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter( option => optionToRemove !== option)
+    }));
   }
 
   addOption(option) {
@@ -42,6 +49,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={this.state.options}
           removeAllOptions={this.removeAllOptions}
+          removeOption={this.removeOption}
         />
         <AddOption addOption={this.addOption} />
       </div>
@@ -85,7 +93,7 @@ const Options = (props) => {
     <div>
       <button onClick={props.removeAllOptions}>Remove All</button>
       {props.options.map((option, index) => (
-        <Option key={index} optionText={option} />
+        <Option key={index} optionText={option} removeOption={props.removeOption}/>
       ))}
     </div>
   );
@@ -94,7 +102,9 @@ const Options = (props) => {
 const Option = (props) => {
   return (
     <div>
-      <p>{props.optionText}</p>
+      <p>{props.optionText}<button onClick={() => {
+        props.removeOption(props.optionText);  
+      }}>Remove</button></p>
     </div>
   );
 };
@@ -116,7 +126,7 @@ class AddOption extends React.Component {
     const error = this.props.addOption(option);
 
     // Shorthand syntax when property/value-var name is same
-    this.setState(() => ({error}));
+    this.setState(() => ({ error }));
 
     e.target.elements.option.value = "";
   }
