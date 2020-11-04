@@ -15,11 +15,7 @@ class IndecisionApp extends React.Component {
   }
 
   removeAllOptions() {
-    this.setState(() => {
-      return {
-        options: []
-      };
-    });
+    this.setState(() => ({options: []}));
   }
 
   addOption(option) {
@@ -29,24 +25,7 @@ class IndecisionApp extends React.Component {
       return 'This option already exists';
     }
 
-    this.setState((prevState) => {
-      // Never manipulate prevState
-      // prevState.options.push(option);
-      // return {
-      //   options: prevState.options
-      // };
-
-      // Not the cleanest way
-      // let options = prevState.options;
-      // options.push(option);
-      // return {
-      //   options: options,
-      // };
-
-      return {
-        options: prevState.options.concat(option)
-      };
-    });
+    this.setState((prevState) => ({options: prevState.options.concat(option)}) );
   }
 
   render() {
@@ -137,7 +116,7 @@ class AddOption extends React.Component {
     const error = this.props.addOption(option);
 
     // Shorthand syntax when property/value-var name is same
-    this.setState(() => {return {error}});
+    this.setState(() => ({error}));
 
     e.target.elements.option.value = "";
   }
