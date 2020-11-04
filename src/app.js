@@ -5,7 +5,7 @@ class IndecisionApp extends React.Component {
     this.removeAllOptions = this.removeAllOptions.bind(this);
     this.addOption = this.addOption.bind(this);
     this.state = {
-      options: [],
+      options: props.options,
     };
   }
 
@@ -17,7 +17,7 @@ class IndecisionApp extends React.Component {
   removeAllOptions() {
     this.setState(() => {
       return {
-        options: [],
+        options: []
       };
     });
   }
@@ -70,6 +70,10 @@ class IndecisionApp extends React.Component {
   }
 }
 
+IndecisionApp.defaultProps = {
+  options: []  
+};
+
 const Header = (props) => {
   return (
     <div>
@@ -79,7 +83,7 @@ const Header = (props) => {
   );
 };
 
-// Default props
+// Default props (works with both functional and class components)
 Header.defaultProps = {
   title: 'default title'
 };
