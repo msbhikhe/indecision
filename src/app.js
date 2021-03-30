@@ -32,7 +32,26 @@ class IndecisionApp extends React.Component {
       return 'This option already exists';
     }
 
+    // Don't use push to add element as we should not manipulate prevState object
     this.setState((prevState) => ({options: prevState.options.concat(option)}) );
+  }
+
+  componentDidMount() {
+    try {
+      const options = JSON.parse(localStorage.getItem('options'));
+    
+      if(options){
+        this.setState(() => ({options}));
+      }
+    } catch (e) {
+
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.options.length !== this.state.options.length){
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);  
+    }
   }
 
   render() {
@@ -92,6 +111,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.removeAllOptions}>Remove All</button>
+      {props.options.length === 0 && <p>Please add an option to get started</p>}
       {props.options.map((option, index) => (
         <Option key={index} optionText={option} removeOption={props.removeOption}/>
       ))}
@@ -128,17 +148,20 @@ class AddOption extends React.Component {
     // Shorthand syntax when property/value-var name is same
     this.setState(() => ({ error }));
 
-    e.target.elements.option.value = "";
+    if(!error) {
+      e.target.elements.option.value = "";
+    }
+    
   }
 
   render() {
     return (
       <div>
-        {this.state.error && <p>{this.state.error}</p>}
         <form onSubmit={this.handleFormSubmit}>
           <input type="text" name="option" />
           <button>Add option</button>
         </form>
+        {this.state.error && <p>{this.state.error}</p>}
       </div>
     );
   }
