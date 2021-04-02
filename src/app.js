@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import './styles/styles.css';
 
 import Action from "./components/Action";
 import AddOption from "./components/AddOption";
